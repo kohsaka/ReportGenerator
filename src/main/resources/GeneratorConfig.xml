@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generator-config>
+
+	<!-- ジェネレータ全般に関するプロパティ -->
+	<properties>
+		<property name="test">test value</property>
+	</properties>
+
+	<!-- レポートを生成する要素の定義 -->
+	<component-set type="renderer">
+		<component>
+			<id>excelRenderer</id>
+			<name>Report renderer for Excel Output</name>
+			<description>Excelファイルの生成を行います。</description>
+			<class-name>hit.repgen.renderer.excel.ExcelReportRenderer
+			</class-name>
+			<properties>
+				<!-- 対象シート名(正規表現) -->
+				<property name="data-sheet-name">^データ</property>
+				<!-- 出力レポートのアクティブシート(負数の場合はテンプレートのアクティブシートを保持) -->
+				<property name="output-active-sheet-index">0</property>
+			</properties>
+		</component>
+		<component>
+			<id>CsvReportRenderer</id>
+			<name>Report renderer for CSV Output</name>
+			<description>CSVファイルの生成を行います。</description>
+			<class-name>hit.repgen.renderer.file.FileReportRenderer</class-name>
+			<properties>
+				<property name="extension">txt, csv</property>
+				<property name="header">false</property>
+				<property name="delimiter">,</property>
+				<property name="value-citing"></property>
+			</properties>
+		</component>
+	</component-set>
+
+	<!-- データ取得を行う要素の定義 -->
+	<component-set type="data-provider">
+		<component>
+			<id>constantDataProvider</id>
+			<name>Data provider for constants</name>
+			<description>定数値を提供するデータプロバイダ</description>
+			<class-name>hit.repgen.dataprovider.ConstantDataProvider</class-name>
+			<properties>
+			</properties>
+		</component>
+		<component>
+			<id>jdbcDataProvider</id>
+			<name>Data provider for generic database</name>
+			<description>DB検索結果を提供するデータプロバイダ</description>
+			<class-name>hit.repgen.dataprovider.JdbcDataProvider</class-name>
+			<properties>
+				<property name="url">jdbc:postgresql://localhost:5432/rgtest
+				</property>
+				<property name="user">rgtest</property>
+				<property name="password">rgtest</property>
+			</properties>
+		</component>
+	</component-set>
+
+
+</generator-config>
